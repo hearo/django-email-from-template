@@ -1,14 +1,10 @@
-from django.utils.functional import cached_property
-
 from . import app_settings
 
 def get_render_method():
     return from_dotted_path(app_settings.EMAIL_RENDER_METHOD)
-get_render_method = cached_property(get_render_method, {}, 0)
 
 def get_context_processors():
     return [from_dotted_path(x) for x in app_settings.EMAIL_CONTEXT_PROCESSORS]
-get_context_processors = cached_property(get_context_processors, {}, 0)
 
 def from_dotted_path(fullpath):
     """
